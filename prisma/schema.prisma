@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurants {
+  id                  String                       @id @default(uuid())
+  name                String
+  email               String                       @unique
+  password            String
+  state               String
+  city                String
+  admin               Boolean                      @default(false)
+  admin_password      String
+  ingredients         Ingredients[]
+  recipes             Recipes[]
+  portion_sizes       Portion_Size[]
+  orders              Orders[]
+  ingredients_data    Ingredient_Prediction_Data[]
+  weather_people_data Basic_Prediction_Data[]
+
+  @@map("restaurants")
+}
+
+model Ingredients {
+  id               String                       @id @default(uuid())
+  name             String
+  id_restaurant    String
+  restaurant       Restaurants?                 @relation(fields: [id_restaurant], references: [id], onDelete: Cascade)
+  recipes          Recipes_Ingredients[]
+  ingredients_data Ingredient_Prediction_Data[]
+
+  @@map("ingredients")
+}
+
+model Recipes {
+  id            String                @id @default(uuid())
+  name          String
+  id_restaurant String
+  restaurant    Restaurants           @relation(fields: [id_restaurant], references: [id], onDelete: Cascade)
+  ingredients   Recipes_Ingredients[]
+  orders        Orders[]
+
+  @@map("recipes")
+}
+
+model Recipes_Ingredients {
+  id_recipe     String
+  recipe        Recipes     @relation(fields: [id_recipe], references: [id], onDelete: Cascade)
+  id_ingredient String
+  ingredient    Ingredients @relation(fields: [id_ingredient], references: [id], onDelete: Cascade)
+  amount        Float
+  unit          String
+
+  @@id([id_recipe, id_ingredient])
+  @@map("recipes_ingredients")
+}
+
+model Portion_Size {
+  id            String      @id @default(uuid())
+  name          String
+  id_restaurant String
+  restaurant    Restaurants @relation(fields: [id_restaurant], references: [id], onDelete: Cascade)
+  orders        Orders[]
+
+  @@map("portion_size")
+}
+
+model Orders {
+  id            String       @id @default(uuid())
+  created_at    DateTime
+  priority      Int
+  status        String
+  id_recipe     String
+  recipe        Recipes      @relation(fields: [id_recipe], references: [id], onDelete: Cascade)
+  id_restaurant String
+  restaurant    Restaurants  @relation(fields: [id_restaurant], references: [id], onDelete: Cascade)
+  end_at        DateTime?
+  portion_id    String
+  portion_size  Portion_Size @relation(fields: [portion_id], references: [id])
+
+  @@map("orders")
+}
+
+model Ingredient_Prediction_Data {
+  id             String      @id @default(uuid())
+  date           DateTime
+  id_restaurant  String
+  restaurant     Restaurants @relation(fields: [id_restaurant], references: [id])
+  id_ingredient  String
+  ingredient     Ingredients @relation(fields: [id_ingredient], references: [id])
+  initial_amount Float
+  final_amount   Float?
+  unit           String
+
+  @@map("ingredient_prediction_data")
+}
+
+model Basic_Prediction_Data {
+  id              String      @id @default(uuid())
+  date            DateTime
+  temperature     Float
+  precipitation   Float
+  customer_amount Int
+  id_restaurant   String
+  restaurant      Restaurants @relation(fields: [id_restaurant], references: [id])
+
+  @@map("basic_prediction_data")
+}
