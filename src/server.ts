@@ -3,6 +3,7 @@ import cors from 'cors';
 import "express-async-errors";
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
+import swaggerFile from './swagger.json';
 dotenv.config();
 
 import { routes } from './routes';
@@ -12,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(undefined, { swaggerOptions: { URL: "./swagger.json" } }));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(routes);
 
 

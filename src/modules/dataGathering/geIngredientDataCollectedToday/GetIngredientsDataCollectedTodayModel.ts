@@ -12,7 +12,7 @@ export class GetIngredientsDataCollectedTodayModel {
             include: {
                 ingredient: {
                     select: {
-                        name: true
+                        name: true,
                     }
                 }
             }

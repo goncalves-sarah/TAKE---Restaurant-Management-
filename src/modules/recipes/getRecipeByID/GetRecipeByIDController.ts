@@ -8,8 +8,8 @@ export class GetRecipeByIDController {
         const { id_restaurant } = req;
 
         const getRecipeByIDModel = new GetRecipeByIDModel();
-        const recipes = await getRecipeByIDModel.execute(id_recipe, id_restaurant);
+        const recipe = await getRecipeByIDModel.execute(id_recipe, id_restaurant);
 
-        return res.status(200).json(recipes);
+        return res.status(200).json(recipe);
     }
 }

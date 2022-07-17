@@ -8,6 +8,7 @@ export class GetRestaurantDataModel {
                 id: id_restaurant
             },
             select: {
+                id: true,
                 name: true,
                 email: true,
                 state: true,

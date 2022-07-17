@@ -5,7 +5,7 @@ interface ICreateIngredient {
     id_restaurant: string;
 }
 
-export class CollectIngredientDataModel {
+export class CreateIngredientsModel {
     async execute({ name, id_restaurant }: ICreateIngredient) {
 
         const ingredientExist = await prisma.ingredients.findFirst({

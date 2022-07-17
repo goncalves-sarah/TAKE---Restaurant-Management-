@@ -18,6 +18,7 @@ export class GetRecipeByIDModel {
                     select: {
                         ingredient: {
                             select: {
+                                id: true,
                                 name: true
                             }
                         },

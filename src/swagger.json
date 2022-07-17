@@ -1,0 +1,1215 @@
+{
+    "openapi" : "3.0.0",
+    "info" : {
+        "title" : "TCC Documentation",
+        "description" : "This is an API that aims to provide a way to automatize the order requests at a restaurant as well as proving a forecasting feature that allows the user to forecast future demand for some ingredients.",
+        "version" : "1.0.0"
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"  
+            }            
+        }
+    },
+    "paths" : {
+        "/restaurants" : {
+            "post" : {
+                "security": [] ,
+                "tags" : ["Restaurants"],
+                "summary" : "Create a restaurant",
+                "description" : "Create a new Restaurant",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "name" : {
+                                        "type" : "string"
+                                    },
+                                    "email" : {
+                                        "type" : "string"
+                                    },
+                                    "password" : {
+                                        "type" : "string"
+                                    },
+                                    "state" : {
+                                        "type" : "string"
+                                    },
+                                    "city" : {
+                                        "type" : "string"
+                                    },
+                                    "admin_password" : {
+                                        "type" : "string"
+                                    }
+                                },
+                                "example" : {
+                                    "name" : "João da Silva",
+                                    "email" : "silva@hotmail.com",
+                                    "password" : "minhaSenha",
+                                    "state":"PR",
+                                    "city":"Curitiba",
+                                    "admin_password":"senhaAdmin"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "201" : {
+                        "description" : "Created",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "id" : {
+                                            "type" : "string"
+                                        },
+                                        "name" : {
+                                            "type" : "string"
+                                        },
+                                        "email" : {
+                                            "type" : "string"
+                                        },
+                                        "password" : {
+                                            "type" : "string"
+                                        },
+                                        "state" : {
+                                            "type" : "string"
+                                        },
+                                        "city" : {
+                                            "type" : "string"
+                                        },
+                                        "admin_password" : {
+                                            "type" : "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Email já cadastrado"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            },
+            "put" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Restaurants"],
+                "summary" : "Update a restaurant",
+                "description" : "Update fields in a Restaurant. PS: Passwords cannot be changed here.",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "name" : {
+                                        "type" : "string"
+                                    },
+                                    "email" : {
+                                        "type" : "string"
+                                    },
+                                    "state" : {
+                                        "type" : "string"
+                                    },
+                                    "city" : {
+                                        "type" : "string"
+                                    }
+                                },
+                                "example" : {
+                                    "name" : "João da Silva Pereira",
+                                    "email" : "silva@hotmail.com",
+                                    "state":"PR",
+                                    "city":"Curitiba"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "200" : {
+                        "description" : "Updated",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "id" : {
+                                            "type" : "string"
+                                        },
+                                        "name" : {
+                                            "type" : "string"
+                                        },
+                                        "email" : {
+                                            "type" : "string"
+                                        },
+                                        "state" : {
+                                            "type" : "string"
+                                        },
+                                        "city" : {
+                                            "type" : "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Email já cadastrado"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            },
+            "get" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Restaurants"],
+                "summary" : "Get the Logged Restaurant Data",
+                "description" : "Get the Logged Restaurant Data",
+                "responses" : {
+                    "200" : {
+                        "description" : "Success",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "id" : {
+                                            "type" : "string"
+                                        },
+                                        "name" : {
+                                            "type" : "string"
+                                        },
+                                        "email" : {
+                                            "type" : "string"
+                                        },
+                                        "state" : {
+                                            "type" : "string"
+                                        },
+                                        "city" : {
+                                            "type" : "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Restaurants"],
+                "summary" : "Delete a Restaurant",
+                "description" : "Delete a Restaurant",
+                "responses" : {
+                    "204" : {
+                        "description" : "Deleted"
+                    }
+                }
+            }
+        },
+        "/restaurants/admin": {
+            "patch" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Restaurants"],
+                "summary" : "Sets Admin Field in a Restaurant",
+                "description" : "Sets Admin Field in a Restaurant",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "admin_password" : {
+                                        "type" : "string"
+                                    }
+                                },
+                                "example" : {
+                                    "admin_password":"senhaAdmin"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "200" : {
+                        "description" : "Updated"
+                    },
+                    "400" : {
+                        "description" : "Senha de Admin Inválida!"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/restaurants/reset/admin": {
+            "patch" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Restaurants"],
+                "summary" : "Reset Admin Field in a Restaurant",
+                "description" : "Reset Admin Field in a Restaurant",
+                "responses" : {
+                    "200" : {
+                        "description" : "Updated"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/authenticate" : {
+            "post" : {
+                "security": [] ,
+                "tags" : ["Restaurants"],
+                "summary" : "Sign in, generating token",
+                "description" : "Sign in for the restaurant and create a jwt token",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "email" : {
+                                        "type" : "string"
+                                    },
+                                    "password" : {
+                                        "type" : "string"
+                                    }
+                                },
+                                "example" : {
+                                    "email" : "silva@hotmail.com",
+                                    "password" : "minhaSenha"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "400" : {
+                        "description" : "Email ou senha inválido!"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    },
+                    "200" : {
+                        "description" : "Successful Login",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "token" : {
+                                            "type" : "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ingredients" : {
+            "post" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Ingredients"],
+                "summary" : "Create an Ingredient",
+                "description" : "Create an Ingredient. PS: Need to have admin_mode set",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "name": {
+                                        "type" : "string"
+                                    }
+                                },
+                                "example" : {
+                                    "name" : "Frango"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "201" : {
+                        "description" : "Created",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "id" : {
+                                            "type" : "string"
+                                        },
+                                        "name": {
+                                            "type" : "string"
+                                        },
+                                        "id_restaurant" : {
+                                            "type" : "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Ingrediente já cadastrado"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            },
+            "get" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Restaurants", "Ingredients"],
+                "summary" : "List all restaurants's ingredients",
+                "description" : "List all of the ingredients assigned to a specific restaurant",
+                "responses" : {
+                    "200" : {
+                        "description" : "Success",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "array",
+                                    "items" : {
+                                        "type" : "object",
+                                        "properties" : {
+                                            "id" : {
+                                                "type" : "string"
+                                            },
+                                            "name": {
+                                                "type" : "string"
+                                            },
+                                            "id_restaurant" : {
+                                                "type" : "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/ingredients/{id_ingredient}" : {
+            "parameters": [
+                {
+                    "name" : "id_ingredient",
+                    "in" : "path",
+                    "required" : true,
+                    "type" : "string",
+                    "description" : "The ingredient id"
+                }
+            ],
+            "delete" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Ingredients"],
+                "summary" : "Delete an Ingredient",
+                "description" : "Delete an Ingredient. PS: Need to have admin_mode set",
+                "responses" : {
+                    "204" : {
+                        "description" : "Deleted"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/recipes" : {
+            "post" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Recipes"],
+                "summary" : "Create a Recipe",
+                "description" : "Create a Recipe. PS: Need to have admin_mode set",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "name": {
+                                        "type" : "string"
+                                    },
+                                    "recipe_ingredients": {
+                                        "type":"array",
+                                        "properties": {
+                                            "id_ingredient": {
+                                                "type" : "string"
+                                            },
+                                            "amount": {
+                                                "type" : "number"
+                                            },
+                                            "unit": {
+                                                "type" : "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "example" : {
+                                    "name": "Receita Teste Z",
+                                    "recipe_ingredients": [
+                                        {
+                                            "id_ingredient": "4413f369-961f-47c6-a287-581916c5a1cf",
+                                            "amount": 10,
+                                            "unit": "g"
+                                        },
+                                        {
+                                            "id_ingredient": "631f257d-5b12-4c7f-a51a-7dec399ed162",
+                                            "amount": 5,
+                                            "unit": "g"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "201" : {
+                        "description" : "Created"
+                    },
+                    "400" : {
+                        "description" : "Receita já cadastrada/Houve um problma, tente novamente"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            },
+            "get" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Restaurants", "Recipes"],
+                "summary" : "List all restaurants's recipes w/o details",
+                "description" : "List the names of the recipes assigned to a specific restaurant",
+                "responses" : {
+                    "200" : {
+                        "description" : "Success",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "array",
+                                    "items" : {
+                                        "type" : "object",
+                                        "properties" : {
+                                            "id" : {
+                                                "type" : "string"
+                                            },
+                                            "name": {
+                                                "type" : "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/recipes/{id_recipe}": {
+            "parameters": [
+                {
+                    "name" : "id_recipe",
+                    "in" : "path",
+                    "required" : true,
+                    "type" : "string",
+                    "description" : "The recipe id"
+                }
+            ],
+            "put" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Recipes"],
+                "summary" : "Update a Recipe",
+                "description" : "Update fields in a Recipe. PS: Need to have admin_mode set",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "name": {
+                                        "type" : "string"
+                                    },
+                                    "recipe_ingredients": {
+                                        "type":"array",
+                                        "properties": {
+                                            "id_ingredient": {
+                                                "type" : "string"
+                                            },
+                                            "amount": {
+                                                "type" : "number"
+                                            },
+                                            "unit": {
+                                                "type" : "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "example" : {
+                                    "name": "Receita Teste Z",
+                                    "recipe_ingredients": [
+                                        {
+                                            "id_ingredient": "4413f369-961f-47c6-a287-581916c5a1cf",
+                                            "amount": 100,
+                                            "unit": "g"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "200" : {
+                        "description" : "Updated"
+                    },
+                    "400" : {
+                        "description" : "Receita não cadastrada!"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            },
+            "get" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Recipes"],
+                "summary" : "List a specific Recipe w/ details",
+                "description" : "List a specific Recipe through its id",
+                "responses" : {
+                    "200" : {
+                        "description" : "Success",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "id" : {
+                                            "type" : "string"
+                                        },
+                                        "name": {
+                                            "type" : "string"
+                                        },
+                                        "ingredients" : {
+                                            "type" : "array",
+                                            "properties": {
+                                                "ingredient": {
+                                                    "type" : "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "amount": {
+                                                    "type" : "number"
+                                                },
+                                                "unit": {
+                                                    "type" : "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            },
+            "delete" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Recipes"],
+                "summary" : "Delete a Recipe",
+                "description" : "Delete a Recipe. PS: Need to have admin_mode set",
+                "responses" : {
+                    "204" : {
+                        "description" : "Deleted"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/portionsizes" : {
+            "post" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Portion Sizes"],
+                "summary" : "Create a Portion Size",
+                "description" : "Create a Portion Size. PS: Need to have admin_mode set",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "name": {
+                                        "type" : "string"
+                                    }
+                                },
+                                "example" : {
+                                    "name" : "Porção Média"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "201" : {
+                        "description" : "Created",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "id" : {
+                                            "type" : "string"
+                                        },
+                                        "name": {
+                                            "type" : "string"
+                                        },
+                                        "id_restaurant" : {
+                                            "type" : "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Tamanho de Porção já cadastrado"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            },
+            "get" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Restaurants", "Portion Sizes"],
+                "summary" : "List all restaurants's portion sizes",
+                "description" : "List all of the portion sizes assigned to a specific restaurant",
+                "responses" : {
+                    "200" : {
+                        "description" : "Success",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "array",
+                                    "items" : {
+                                        "type" : "object",
+                                        "properties" : {
+                                            "id" : {
+                                                "type" : "string"
+                                            },
+                                            "name": {
+                                                "type" : "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/portionsizes/{portion_id}" : {
+            "parameters": [
+                {
+                    "name" : "portion_id",
+                    "in" : "path",
+                    "required" : true,
+                    "type" : "string",
+                    "description" : "The portion size id"
+                }
+            ],
+            "delete" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Portion Sizes"],
+                "summary" : "Delete a Portion Size",
+                "description" : "Delete a Portion Size. PS: Need to have admin_mode set",
+                "responses" : {
+                    "204" : {
+                        "description" : "Deleted"
+                    },
+                    "400": {
+                        "description": "Tamanho de Porção não existe/Houve um problema na solicitação"
+                    }, 
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/orders" : {
+            "post" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Orders"],
+                "summary" : "Create an Order",
+                "description" : "Create an Order",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "priority": {
+                                        "type" : "string"
+                                    },
+                                    "id_recipe": {
+                                        "type" : "string"
+                                    },
+                                    "portion_id": {
+                                        "type" : "string"
+                                    }
+                                },
+                                "example" : {
+                                    "priority": 2, 
+                                    "id_recipe": "21f2bbcd-b1aa-4449-a053-628eb7f89a1b", 
+                                    "portion_id": "20fe7454-5b03-409c-8322-2842be9b9eaf"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "201" : {
+                        "description" : "Created",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "id" : {
+                                            "type" : "string"
+                                        },
+                                        "priority": {
+                                            "type" : "string"
+                                        },
+                                        "id_recipe": {
+                                            "type" : "string"
+                                        },
+                                        "portion_id": {
+                                            "type" : "string"
+                                        },
+                                        "id_restaurant" : {
+                                            "type" : "string"
+                                        },
+                                        "status": {
+                                            "type" : "string"
+                                        },
+                                        "created_at": {
+                                            "type" : "string"
+                                        },
+                                        "end_at": {
+                                            "type" : "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            },
+            "get" : {
+                "parameters": [
+                    {
+                        "name" : "status",
+                        "in" : "query",
+                        "required" : true,
+                        "type" : "string",
+                        "description" : "The desidered status of the orders"
+                    }
+                ],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Restaurants", "Orders"],
+                "summary" : "List all restaurants's orders based on current status",
+                "description" : "List the names of the orders with a specific status assigned to the restaurant",
+                "responses" : {
+                    "200" : {
+                        "description" : "Success",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "array",
+                                    "items" : {
+                                        "type" : "object",
+                                        "properties" : {
+                                            "orders" : {
+                                                "type" : "object",
+                                                "properties": {
+                                                    "id" : {
+                                                        "type" : "string"
+                                                    },
+                                                    "priority": {
+                                                        "type" : "string"
+                                                    },
+                                                    "recipe": {
+                                                        "type" : "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    },
+                                                    "portion_size": {
+                                                        "type" : "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    },
+                                                    "status": {
+                                                        "type" : "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type" : "string"
+                                                    },
+                                                    "end_at": {
+                                                        "type" : "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/orders/{id_order}" : {
+            "parameters": [
+                {
+                    "name" : "id_order",
+                    "in" : "path",
+                    "required" : true,
+                    "type" : "string",
+                    "description" : "The order id"
+                }
+            ],
+            "patch" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Orders"],
+                "summary" : "Updates Order",
+                "description" : "Updates Order",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "priority": {
+                                        "type" : "string"
+                                    },
+                                    "portion_id": {
+                                        "type" : "string"
+                                    },
+                                    "status": {
+                                        "type" : "string"
+                                    }
+                                },
+                                "example" : {
+                                    "priority": 4, 
+                                    "portion_id": "0594753f-ef7c-43a8-aeaa-d29b25df2dd5",
+                                    "status": "Concluído"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "200" : {
+                        "description" : "Updated"
+                    },
+                    "400" : {
+                        "description" : "Pedido não cadastrado!"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/{UF}/cities": {
+            "parameters": [
+                {
+                    "name" : "UF",
+                    "in" : "path",
+                    "required" : true,
+                    "type" : "string",
+                    "description" : "The selected UF"
+                }
+            ],
+            "get" : {
+                "security": [],
+                "tags" : ["IBGE Localidades API"],
+                "summary" : "Get the cities of a UF",
+                "description" : "Get the cities of a UF",
+                "responses" : {
+                    "200" : {
+                        "description" : "Success",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "array"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Houve um problema, tente novamente"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/data/collect/ingredients": {
+            "post" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Data Collect","Restaurants"],
+                "summary" : "Collect the ingredient data",
+                "description" : "To be used at the beggining and end of a work day",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "ingredients_data" : {
+                                        "type" : "array",
+                                        "properties": {
+                                            "type":"object",
+                                            "properties":{
+                                                "id_ingredient":{
+                                                    "type": "string"
+                                                },
+                                                "initial_amount":{
+                                                    "type": "number"
+                                                },
+                                                "final_amount":{
+                                                    "type": "number"
+                                                },
+                                                "unit":{
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example" : {
+                                    "ingredients_data": [
+                                        {
+                                            "id_ingredient": "4413f369-961f-47c6-a287-581916c5a1cf",
+                                            "initial_amount": 100,
+                                            "final_amount": 50,
+                                            "unit": "g"
+                                        },
+                                         {
+                                            "id_ingredient": "631f257d-5b12-4c7f-a51a-7dec399ed162",
+                                            "initial_amount": 100,
+                                            "final_amount": 60,
+                                            "unit": "g"
+                                        },
+                                         {
+                                            "id_ingredient": "e7ac5358-b8b7-4a3c-bec7-c6716616d013",
+                                            "initial_amount": 2,
+                                            "final_amount": 0.8,
+                                            "unit": "kg"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "201" : {
+                        "description" : "Dados Coletados com Sucesso"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/data/collect/additional": {
+            "post" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Data Collect","Restaurants","Weather API"],
+                "summary" : "Collect the weather and people amount parameters",
+                "description" : "To be used at end of a work day",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "customer_amount" : {
+                                        "type" : "number"
+                                    }
+                                },
+                                "example" : {
+                                    "customer_amount": 50
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "201" : {
+                        "description" : "Dados Coletados com Sucesso"
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/data/today": {
+            "get" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Data Collect","Restaurants"],
+                "summary" : "List the ingredient data collected today",
+                "description" : "List the ingredient data collected today",
+                "responses" : {
+                    "200" : {
+                        "description" : "Dados Coletados com Sucesso",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "array",
+                                    "properties" : {
+                                        "type": "object",
+                                        "properties": {
+                                            "id" : {
+                                                "type" : "string"
+                                            },
+                                            "date": {
+                                                "type" : "string"
+                                            },
+                                            "id_restaurant" : {
+                                                "type" : "string"
+                                            },
+                                            "id_ingredient" : {
+                                                "type" : "string"
+                                            },
+                                            "initial_amount": {
+                                                "type" : "number"
+                                            },
+                                            "final_amount" : {
+                                                "type" : "number"
+                                            },
+                                            "unit": {
+                                                "type" : "string"
+                                            },
+                                            "ingredient": {
+                                                "type" : "object",
+                                                "properties": {
+                                                    "name" : {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        }
+    }
+}
+

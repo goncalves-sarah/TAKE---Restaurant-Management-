@@ -17,7 +17,7 @@ export async function ensureAuthenticateRestaurant(req: Request, res: Response, 
     const [, token] = authHeader.split(" ");
 
     try {
-        const { sub } = verify(token, "28553d4a254f863047bb9b01bc39e6d2") as IPayload;
+        const { sub } = verify(token, process.env.SALT) as IPayload;
 
         req.id_restaurant = sub;
 

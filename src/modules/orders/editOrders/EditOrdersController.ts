@@ -11,6 +11,6 @@ export class EditOrdersController {
         const editOrdersModel = new EditOrdersModel();
         await editOrdersModel.execute({ priority, portion_id, status, id_restaurant, id_order });
 
-        return res.status(201).send();
+        return res.status(200).send();
     }
 }

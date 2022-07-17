@@ -34,7 +34,7 @@ export class EditOrdersModel {
                 priority,
                 portion_id,
                 status,
-                end_at: status == 'Concluído' ? new Date : null
+                end_at: status == 'Concluído' ? new Date() : null
             }
         });
 

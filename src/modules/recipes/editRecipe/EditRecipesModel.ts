@@ -1,16 +1,11 @@
+import { Recipes_Ingredients } from "@prisma/client";
 import { prisma } from "../../../database/prismaClient";
 
 interface IEditRecipe {
     id_recipe: string;
     name: string;
     id_restaurant: string;
-    recipe_ingredients: [
-        {
-            id: string;
-            amount: number;
-            unit: string;
-        }
-    ]
+    recipe_ingredients: Recipes_Ingredients[]
 }
 
 export class EditRecipesModel {
@@ -39,45 +34,19 @@ export class EditRecipesModel {
                 id: recipeExist.id
             },
             data: {
-                name
+                name,
+                ingredients: {
+                    deleteMany: {
+                        id_recipe: {
+                            equals: recipeExist.id
+                        }
+                    },
+                    createMany: {
+                        data: recipe_ingredients
+                    }
+                }
             }
         })
-
-
-        recipe_ingredients.map(async ingredient => {
-            const ingredientPresent = recipeExist.ingredients.filter(i => {
-                return i.id_ingredient === ingredient.id
-            });
-            if (ingredientPresent) {
-                await prisma.recipes_Ingredients.update({
-                    where: {
-                        id_recipe_id_ingredient: {
-                            id_recipe,
-                            id_ingredient: ingredient.id
-                        }
-                    },
-                    data: {
-                        amount: ingredient.amount,
-                        unit: ingredient.unit
-                    }
-                })
-            } else {
-                await prisma.recipes.update({
-                    where: {
-                        id: recipeExist.id
-                    },
-                    data: {
-                        ingredients: {
-                            create: {
-                                id_ingredient: ingredient.id,
-                                amount: ingredient.amount,
-                                unit: ingredient.unit
-                            }
-                        }
-                    }
-                })
-            }
-        });
 
     }
 }

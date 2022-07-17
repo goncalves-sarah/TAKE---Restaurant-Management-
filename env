@@ -1,0 +1,4 @@
+# Rename this file to .env
+DATABASE_URL= add the url for the database
+SALT= add a MD5 string to generate token
+weatherAPIKEY = add your api key from https://www.weatherapi.com/ 

@@ -20,11 +20,13 @@ export class GetFilteredOrdersByRestaurantModel {
                         status: true,
                         recipe: {
                             select: {
+                                id: true,
                                 name: true
                             }
                         },
                         portion_size: {
                             select: {
+                                id: true,
                                 name: true
                             }
                         }

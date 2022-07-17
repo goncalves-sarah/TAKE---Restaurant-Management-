@@ -7,10 +7,6 @@ interface IAuthenticateRestaurant {
     password: string;
 }
 
-interface IProcessEnv {
-    SALT: string;
-}
-
 export class AuthenticateRestaurantModel {
     async execute({ email, password }: IAuthenticateRestaurant) {
         const restaurant = await prisma.restaurants.findFirst({

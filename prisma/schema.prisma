@@ -81,7 +81,7 @@ model Orders {
   restaurant    Restaurants  @relation(fields: [id_restaurant], references: [id], onDelete: Cascade)
   end_at        DateTime?
   portion_id    String
-  portion_size  Portion_Size @relation(fields: [portion_id], references: [id])
+  portion_size  Portion_Size @relation(fields: [portion_id], references: [id], onDelete: SetNull)
 
   @@map("orders")
 }
@@ -90,9 +90,9 @@ model Ingredient_Prediction_Data {
   id             String      @id @default(uuid())
   date           DateTime
   id_restaurant  String
-  restaurant     Restaurants @relation(fields: [id_restaurant], references: [id])
+  restaurant     Restaurants @relation(fields: [id_restaurant], references: [id], onDelete: Cascade)
   id_ingredient  String
-  ingredient     Ingredients @relation(fields: [id_ingredient], references: [id])
+  ingredient     Ingredients @relation(fields: [id_ingredient], references: [id], onDelete: Cascade)
   initial_amount Float
   final_amount   Float?
   unit           String
@@ -107,7 +107,7 @@ model Basic_Prediction_Data {
   precipitation   Float
   customer_amount Int
   id_restaurant   String
-  restaurant      Restaurants @relation(fields: [id_restaurant], references: [id])
+  restaurant      Restaurants @relation(fields: [id_restaurant], references: [id], onDelete: Cascade)
 
   @@map("basic_prediction_data")
 }

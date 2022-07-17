@@ -42,6 +42,7 @@ export class EditRestaurantModel {
                     city
                 },
                 select: {
+                    id: true,
                     name: true,
                     email: true,
                     state: true,

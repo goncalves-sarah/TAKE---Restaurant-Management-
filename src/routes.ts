@@ -43,7 +43,7 @@ routes.post('/data/collect/ingredients', ensureAuthenticateRestaurant, collectIn
 routes.post('/data/collect/additional', ensureAuthenticateRestaurant, collectWeatherPeopleDataController().handle);
 
 routes.put('/restaurants', ensureAuthenticateRestaurant, editRestaurantController().handle);
-routes.put('/recipes', ensureAuthenticateRestaurant, ensureAuthenticateAdminMode, editRecipeController().handle);
+routes.put('/recipes/:id_recipe', ensureAuthenticateRestaurant, ensureAuthenticateAdminMode, editRecipeController().handle);
 
 routes.patch('/restaurants/admin', ensureAuthenticateRestaurant, setAdminModeController().handle);
 routes.patch('/restaurants/reset/admin', ensureAuthenticateRestaurant, resetAdminModeController().handle);
