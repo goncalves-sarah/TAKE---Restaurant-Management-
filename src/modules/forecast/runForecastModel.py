@@ -6,7 +6,7 @@ import pathlib
 import numpy as np
 import warnings
 import json
-print("tamo aqui")
+
 path = pathlib.Path(__file__).parent.resolve().parents[1]
 
 days_to_be_forecasted = int(sys.argv[1])
