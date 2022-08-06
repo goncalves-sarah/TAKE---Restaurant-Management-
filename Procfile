@@ -1,1 +1,1 @@
-web: yarn prisma migrate dev && yarn start
+web: yarn start
