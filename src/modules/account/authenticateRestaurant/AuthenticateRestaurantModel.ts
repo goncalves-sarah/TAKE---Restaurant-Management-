@@ -25,7 +25,7 @@ export class AuthenticateRestaurantModel {
         if (!passwordMatch) {
             throw new Error("Email ou senha inválido!")
         }
-        console.log(process.env.SALT)
+
         const token = sign({ email }, process.env.SALT, {
             subject: restaurant.id,
             expiresIn: process.env.expires_in
