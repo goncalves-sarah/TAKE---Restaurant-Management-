@@ -12,7 +12,6 @@ export class GetIngredientsWithTrainedModelsModel {
             readdir(path, function (err, files) {
                 //handling error
                 if (err) {
-                    console.log('estamos aqui')
                     reject('Something went wrong. Try Again');
                 }
                 //listing all files using forEach

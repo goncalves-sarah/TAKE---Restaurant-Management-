@@ -23,7 +23,6 @@ export class GetForecastedDataModel {
                 });
 
                 child.on('close', (data) => {
-                    console.log('rodou')
                     resolve(predictions)
                 });
 

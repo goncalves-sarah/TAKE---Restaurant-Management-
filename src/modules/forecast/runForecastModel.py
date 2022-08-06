@@ -13,7 +13,7 @@ days_to_be_forecasted = int(sys.argv[1])
 ingredients = sys.argv[2].split("-")
 restaurant_id = sys.argv[3]
 
-weather = requests.get("http://localhost:3000/weather",json = {
+weather = requests.get("https://tcc-2022.herokuapp.com/weather",json = {
             "days" : days_to_be_forecasted,
         }).json()
 
