@@ -4,8 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "tsc": "tsc",
     "dev": "ts-node-dev  --exit-child --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts ",
-    "test": "jest --run-in-band"
+    "test": "jest --run-in-band",
+    "start": "node dist/src/server.js"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
