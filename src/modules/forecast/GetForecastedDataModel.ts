@@ -1,4 +1,5 @@
 import { spawn } from "child_process";
+import { join } from 'path';
 
 interface IGetForecastedData {
     ingredients: string,
@@ -13,14 +14,14 @@ export class GetForecastedDataModel {
 
         return new Promise((resolve, reject) => {
             try {
-
-                const child = spawn('python', ['src/modules/forecast/runForecastModel.py', days_to_be_forecasted, ingredients, id_restaurant]);
+                const path = join(__dirname, '/runForecastModel.py');
+                const child = spawn('python', [path, days_to_be_forecasted, ingredients, id_restaurant]);
 
                 child.stdout.setEncoding('utf8');
 
                 child.stdout.on('data', (data) => {
                     predictions = JSON.parse(data)
-                    console.log(data.toText())
+                    console.log(predictions)
                 });
 
                 child.on('close', (data) => {

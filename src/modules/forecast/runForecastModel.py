@@ -6,7 +6,7 @@ import pathlib
 import numpy as np
 import warnings
 import json
-
+print("tamo aqui")
 path = pathlib.Path(__file__).parent.resolve().parents[1]
 
 days_to_be_forecasted = int(sys.argv[1])
@@ -44,7 +44,7 @@ for ingredient in ingredients:
     filename = f'{path}\models\\{restaurant_id}_{ingredient}Model.sav'
     
     model = pickle.load(open(filename, 'rb'))
-    print(model,filename)
+    
     warnings.filterwarnings('ignore')
     prediction = model.forecast(steps = days_to_be_forecasted, exog = df_exogenous).reset_index(drop = True)
     
