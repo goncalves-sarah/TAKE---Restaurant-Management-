@@ -1,1 +1,1 @@
-web: yarn tsc & yarn start
+web: yarn tsc && yarn start
