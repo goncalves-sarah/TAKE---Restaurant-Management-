@@ -4,11 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && yarn prisma migrate dev",
     "dev": "ts-node-dev  --exit-child --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts ",
     "test": "jest --run-in-band",
-    "start": "node dist/src/server.js",
-    "heroku-postbuild": "yarn prisma migrate dev && yarn build"
+    "start": "node dist/src/server.js"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
