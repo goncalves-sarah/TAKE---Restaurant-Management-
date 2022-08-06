@@ -20,6 +20,7 @@ export class GetForecastedDataModel {
 
                 child.stdout.on('data', (data) => {
                     predictions = JSON.parse(data)
+                    console.log(data.toText())
                 });
 
                 child.on('close', (data) => {

@@ -44,6 +44,7 @@ for ingredient in ingredients:
     filename = f'{path}\models\\{restaurant_id}_{ingredient}Model.sav'
     
     model = pickle.load(open(filename, 'rb'))
+    print(model,filename)
     warnings.filterwarnings('ignore')
     prediction = model.forecast(steps = days_to_be_forecasted, exog = df_exogenous).reset_index(drop = True)
     
