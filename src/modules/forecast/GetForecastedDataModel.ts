@@ -23,8 +23,13 @@ export class GetForecastedDataModel {
                 });
 
                 child.on('close', (data) => {
+                    console.log('rodou')
                     resolve(predictions)
                 });
+
+                child.on('error', (err) => {
+                    console.log(err);
+                })
 
             } catch (e) {
                 reject(e);

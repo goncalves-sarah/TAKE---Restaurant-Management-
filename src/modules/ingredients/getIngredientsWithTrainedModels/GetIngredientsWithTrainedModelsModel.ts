@@ -1,4 +1,3 @@
-import prisma from "../../../database/prismaClient";
 import { join } from "path";
 import { readdir } from 'fs';
 
@@ -13,6 +12,7 @@ export class GetIngredientsWithTrainedModelsModel {
             readdir(path, function (err, files) {
                 //handling error
                 if (err) {
+                    console.log('estamos aqui')
                     reject('Something went wrong. Try Again');
                 }
                 //listing all files using forEach
