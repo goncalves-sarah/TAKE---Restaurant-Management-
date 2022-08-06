@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc && yarn prisma deploy",
+    "build": "tsc && yarn prisma migrate deploy",
     "dev": "ts-node-dev  --exit-child --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts ",
     "test": "jest --run-in-band",
     "start": "node dist/src/server.js"
