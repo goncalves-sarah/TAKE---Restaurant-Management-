@@ -9,8 +9,8 @@ export class EditRecipesController {
         const { id_restaurant } = req;
 
         const editRecipesModel = new EditRecipesModel();
-        await editRecipesModel.execute({ id_recipe, name, id_restaurant, recipe_ingredients });
+        const recipe = await editRecipesModel.execute({ id_recipe, name, id_restaurant, recipe_ingredients });
 
-        return res.status(200).send();
+        return res.status(200).json(recipe);
     }
 }

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { prisma } from "../database/prismaClient";
+import prisma from "../database/prismaClient";
 
 export async function ensureAuthenticateAdminMode(req: Request, res: Response, next: NextFunction) {
 

@@ -1,5 +1,5 @@
 import { Recipes_Ingredients } from "@prisma/client";
-import { prisma } from "../../../database/prismaClient";
+import prisma from "../../../database/prismaClient";
 
 interface IEditRecipe {
     id_recipe: string;
@@ -29,7 +29,20 @@ export class EditRecipesModel {
             throw new Error("Receita não cadastrada!")
         }
 
-        await prisma.recipes.update({
+        if (name != recipeExist.name) {
+            const nameAlreadyBeingUsed = await prisma.recipes.findFirst({
+                where: {
+                    id_restaurant,
+                    name
+                }
+            });
+
+            if (nameAlreadyBeingUsed) {
+                throw new Error("Este nome de receita já está sendo utilizado")
+            }
+        }
+
+        const recipe = await prisma.recipes.update({
             where: {
                 id: recipeExist.id
             },
@@ -45,8 +58,13 @@ export class EditRecipesModel {
                         data: recipe_ingredients
                     }
                 }
+            },
+            include: {
+                ingredients: true
             }
-        })
+        });
+
+        return recipe;
 
     }
 }

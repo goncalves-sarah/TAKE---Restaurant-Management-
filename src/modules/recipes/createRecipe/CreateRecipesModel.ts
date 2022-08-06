@@ -1,15 +1,10 @@
-import { prisma } from "../../../database/prismaClient";
+import { Recipes_Ingredients } from "@prisma/client";
+import prisma from "../../../database/prismaClient";
 
 interface ICreateRecipe {
     name: string;
     id_restaurant: string;
-    recipe_ingredients: [
-        {
-            id_ingredient: string;
-            amount: number;
-            unit: string;
-        }
-    ]
+    recipe_ingredients: Recipes_Ingredients[]
 }
 
 export class CreateRecipesModel {
@@ -31,39 +26,21 @@ export class CreateRecipesModel {
             throw new Error("Receita já cadastrada")
         }
 
-        const { id } = await prisma.recipes.create({
+        const recipe = await prisma.recipes.create({
             data: {
                 name,
                 id_restaurant,
+                ingredients: {
+                    createMany: {
+                        data: recipe_ingredients
+                    }
+                }
+            },
+            include: {
+                ingredients: true
             }
         });
 
-        try {
-            recipe_ingredients.map(async ingredient => {
-                await prisma.recipes.update({
-                    where: {
-                        id
-                    },
-                    data: {
-                        ingredients: {
-                            create: {
-                                id_ingredient: ingredient.id_ingredient,
-                                amount: ingredient.amount,
-                                unit: ingredient.unit
-                            }
-                        }
-                    }
-                })
-            });
-        } catch (err) {
-            await prisma.recipes.delete({
-                where: {
-                    id
-                }
-            });
-            throw new Error("Houve um problma, tente novamente")
-        }
-
-
+        return recipe;
     }
 }

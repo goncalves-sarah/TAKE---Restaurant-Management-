@@ -8,8 +8,8 @@ export class CreateRecipesController {
         const { id_restaurant } = req;
 
         const createRecipesModel = new CreateRecipesModel();
-        await createRecipesModel.execute({ name, id_restaurant, recipe_ingredients });
+        const recipe = await createRecipesModel.execute({ name, id_restaurant, recipe_ingredients });
 
-        return res.status(201).send();
+        return res.status(201).json(recipe);
     }
 }

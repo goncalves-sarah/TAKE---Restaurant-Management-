@@ -4,28 +4,39 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev  --exit-child --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts "
+    "dev": "ts-node-dev  --exit-child --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts ",
+    "test": "jest --run-in-band"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/jest": "^28.1.6",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/supertest": "^2.0.12",
     "@types/swagger-ui-express": "^4.1.3",
+    "@types/uuid": "^8.3.4",
+    "jest": "^28.1.3",
     "prisma": "^3.15.2",
+    "supertest": "^6.2.4",
+    "ts-jest": "^28.0.7",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "uuid": "^8.3.2"
   },
   "dependencies": {
     "@prisma/client": "^3.15.2",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
+    "dayjs": "^1.11.4",
     "dotenv": "^16.0.1",
+    "dotenv-cli": "^6.0.0",
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.3",
     "swagger-ui-express": "^4.4.0"
   }
 }

@@ -1,4 +1,4 @@
-import { prisma } from "../../../database/prismaClient";
+import prisma from "../../../database/prismaClient";
 
 export class GetRestaurantDataModel {
     async execute(id_restaurant: string) {

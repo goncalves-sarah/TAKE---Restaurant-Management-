@@ -3,9 +3,12 @@ import { CollectIngredientsDataController } from "./modules/dataGathering/collec
 import { CollectWeatherPeopleDataController } from "./modules/dataGathering/collectWeatherPeopleData/CollectWeatherPeopleDataController";
 import { GetIngredientsDataCollectedTodayController } from "./modules/dataGathering/geIngredientDataCollectedToday/GetIngredientsDataCollectedTodayController";
 import { GetCityByUFController } from "./modules/external_API/IBGE_Localidades/GetCityByUFController";
+import { GetWeatherForecastController } from "./modules/external_API/weatherAPI/GetWeatherForecastController";
+import { GetForecastedDataController } from "./modules/forecast/GetForecastedDataController";
 import { CreateIngredientsController } from "./modules/ingredients/createIngredient/CreateIngredientsController";
 import { DeleteIngredientsController } from "./modules/ingredients/deleteIngredient/DeleteIngredientsController";
 import { GetIngredientsByRestaurantController } from "./modules/ingredients/getIngredientsByRestaurant/GetIngredientsByRestaurantController";
+import { GetIngredientsWithTrainedModelsController } from "./modules/ingredients/getIngredientsWithTrainedModels/GetIngredientsWithTrainedModelsController";
 import { CreateOrdersController } from "./modules/orders/createOrders/CreateOrdersController";
 import { EditOrdersController } from "./modules/orders/editOrders/EditOrdersController";
 import { GetFilteredOrdersByRestaurantController } from "./modules/orders/getFilteredOrdersByRestaurant/GetFilteredOrdersByRestaurantController";
@@ -72,6 +75,10 @@ class InitializeControllers {
         return new GetIngredientsByRestaurantController();
     }
 
+    getIngredientsWithTrainedModelsController() {
+        return new GetIngredientsWithTrainedModelsController();
+    }
+
     // RECIPES
 
     createRecipesController() {
@@ -136,6 +143,18 @@ class InitializeControllers {
 
     collectWeatherPeopleDataController() {
         return new CollectWeatherPeopleDataController();
+    }
+
+    // FORECAST - PREDICTION
+
+    getForecastedDataController() {
+        return new GetForecastedDataController();
+    }
+
+    // WEATHER API FORECAST
+
+    getWeatherForecastController() {
+        return new GetWeatherForecastController();
     }
 
 }

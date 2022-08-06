@@ -7,8 +7,8 @@ export class ResetAdminModeController {
         const { id_restaurant } = req;
 
         const resetAdminModeModel = new ResetAdminModeModel();
-        await resetAdminModeModel.execute({ id_restaurant });
+        const status = await resetAdminModeModel.execute({ id_restaurant });
 
-        return res.status(200).send();
+        return res.status(200).json(status);
     }
 }

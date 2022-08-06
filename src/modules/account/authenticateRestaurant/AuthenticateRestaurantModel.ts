@@ -1,6 +1,7 @@
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
-import { prisma } from "../../../database/prismaClient";
+import prisma from "../../../database/prismaClient";
+import dayjs from "dayjs";
 
 interface IAuthenticateRestaurant {
     email: string;
@@ -27,8 +28,21 @@ export class AuthenticateRestaurantModel {
 
         const token = sign({ email }, process.env.SALT, {
             subject: restaurant.id,
-            expiresIn: "1d"
+            expiresIn: process.env.expires_in
         });
+
+        const refresh_token = sign({ email }, process.env.SALT_REFRESH_TOKEN, {
+            subject: restaurant.id,
+            expiresIn: process.env.expires_in_refresh_token
+        })
+
+        await prisma.refresh_Tokens.create({
+            data: {
+                id_restaurant: restaurant.id,
+                refresh_token,
+                expiration_date: dayjs().add(parseInt(process.env.expires_in_refresh_token_days), "days").toDate()
+            }
+        })
 
         return token;
 

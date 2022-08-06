@@ -17,6 +17,7 @@ const {
     createIngredientController,
     deleteIngredientController,
     getIngredientsByRestaurantDataController,
+    getIngredientsWithTrainedModelsController,
     createRecipesController,
     editRecipeController,
     deleteRecipesController,
@@ -30,7 +31,9 @@ const {
     getFileteredOrdersByRestaurantDataController,
     collectIngredientDataController,
     getIngredientDataCollectedController,
-    collectWeatherPeopleDataController
+    collectWeatherPeopleDataController,
+    getForecastedDataController,
+    getWeatherForecastController
 } = new InitializeControllers();
 
 routes.post('/restaurants', createRestaurantController().handle);
@@ -51,12 +54,15 @@ routes.patch('/orders/:id_order', ensureAuthenticateRestaurant, editOrdersContro
 
 routes.get('/restaurants', ensureAuthenticateRestaurant, getRestaurantDataController().handle);
 routes.get('/ingredients', ensureAuthenticateRestaurant, getIngredientsByRestaurantDataController().handle);
+routes.get('/ingredients/trained_models', ensureAuthenticateRestaurant, getIngredientsWithTrainedModelsController().handle);
 routes.get('/recipes/:id_recipe', ensureAuthenticateRestaurant, getRecipeByIDController().handle);
 routes.get('/recipes', ensureAuthenticateRestaurant, getRecipesByRestaurantDataController().handle);
 routes.get('/portionsizes', ensureAuthenticateRestaurant, getPortionSizesByRestaurantDataController().handle);
 routes.get('/orders', ensureAuthenticateRestaurant, getFileteredOrdersByRestaurantDataController().handle);
 routes.get('/data/today', ensureAuthenticateRestaurant, getIngredientDataCollectedController().handle);
 routes.get('/:UF/cities', getCityByUFController().handle);
+routes.get('/weather', getWeatherForecastController().handle);
+routes.get('/forecast', ensureAuthenticateRestaurant, getForecastedDataController().handle);
 
 routes.delete('/restaurants', ensureAuthenticateRestaurant, deleteRestaurantController().handle)
 routes.delete('/ingredients/:id_ingredient', ensureAuthenticateRestaurant, ensureAuthenticateAdminMode, deleteIngredientController().handle);

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { prisma } from "../../../database/prismaClient";
+import prisma from "../../../database/prismaClient";
 
 interface ICreateBasicPredicitonData {
     id_restaurant: string;

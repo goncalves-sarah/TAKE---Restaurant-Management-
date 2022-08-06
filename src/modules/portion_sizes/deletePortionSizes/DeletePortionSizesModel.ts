@@ -1,4 +1,4 @@
-import { prisma } from "../../../database/prismaClient";
+import prisma from "../../../database/prismaClient";
 
 export class DeletePortionSizesModel {
     async execute(portion_id: string, id_restaurant: string) {

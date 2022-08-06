@@ -1,5 +1,5 @@
 import { compare } from "bcrypt";
-import { prisma } from "../../../database/prismaClient";
+import prisma from "../../../database/prismaClient";
 
 interface ISetAdminMode {
     id_restaurant: string;
@@ -9,20 +9,20 @@ interface ISetAdminMode {
 export class SetAdminModeModel {
     async execute({ id_restaurant, admin_password }: ISetAdminMode) {
 
-        const restaurant = await prisma.restaurants.findFirst({
+        const restaurantAlreadyExists = await prisma.restaurants.findFirst({
             where: {
                 id: id_restaurant
             }
         });
 
-        if (restaurant) {
-            const passwordMatch = await compare(admin_password, restaurant.admin_password);
+        if (restaurantAlreadyExists) {
+            const passwordMatch = await compare(admin_password, restaurantAlreadyExists.admin_password);
 
             if (!passwordMatch) {
                 throw new Error("Senha de Admin Inválida!");
             }
 
-            await prisma.restaurants.update({
+            const restaurant = await prisma.restaurants.update({
                 where: {
                     id: id_restaurant
                 },
@@ -30,6 +30,8 @@ export class SetAdminModeModel {
                     admin: true
                 }
             });
+
+            return restaurant.admin;
         }
 
     }

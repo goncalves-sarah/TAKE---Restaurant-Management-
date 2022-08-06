@@ -1,4 +1,4 @@
-import { prisma } from "../../../database/prismaClient";
+import prisma from "../../../database/prismaClient";
 
 interface IEditOrder {
     priority: number;
@@ -26,7 +26,7 @@ export class EditOrdersModel {
             throw new Error("Pedido não cadastrado!")
         }
 
-        await prisma.orders.update({
+        const order = await prisma.orders.update({
             where: {
                 id: id_order
             },
@@ -38,5 +38,6 @@ export class EditOrdersModel {
             }
         });
 
+        return order;
     }
 }

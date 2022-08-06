@@ -9,8 +9,8 @@ export class EditOrdersController {
         const { id_restaurant } = req;
 
         const editOrdersModel = new EditOrdersModel();
-        await editOrdersModel.execute({ priority, portion_id, status, id_restaurant, id_order });
+        const order = await editOrdersModel.execute({ priority, portion_id, status, id_restaurant, id_order });
 
-        return res.status(200).send();
+        return res.status(200).json(order);
     }
 }

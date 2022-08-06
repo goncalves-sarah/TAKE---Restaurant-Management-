@@ -22,6 +22,7 @@ model Restaurants {
   orders              Orders[]
   ingredients_data    Ingredient_Prediction_Data[]
   weather_people_data Basic_Prediction_Data[]
+  refresh_tokens      Refresh_Tokens[]
 
   @@map("restaurants")
 }
@@ -110,4 +111,15 @@ model Basic_Prediction_Data {
   restaurant      Restaurants @relation(fields: [id_restaurant], references: [id], onDelete: Cascade)
 
   @@map("basic_prediction_data")
+}
+
+model Refresh_Tokens {
+  id              String      @id @default(uuid())
+  refresh_token   String
+  id_restaurant   String
+  restaurant      Restaurants @relation(fields: [id_restaurant], references: [id], onDelete: Cascade)
+  created_at      DateTime    @default(now())
+  expiration_date DateTime
+
+  @@map("refresh_tokens")
 }

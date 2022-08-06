@@ -250,7 +250,19 @@
                 },
                 "responses" : {
                     "200" : {
-                        "description" : "Updated"
+                        "description" : "Updated",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "admin": {
+                                            "type" : "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "400" : {
                         "description" : "Senha de Admin Inválida!"
@@ -271,7 +283,19 @@
                 "description" : "Reset Admin Field in a Restaurant",
                 "responses" : {
                     "200" : {
-                        "description" : "Updated"
+                        "description" : "Updated",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "admin": {
+                                            "type" : "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "500" : {
                         "description" : "Internal Server Error"
@@ -424,6 +448,34 @@
                 }
             }
         },
+        "/ingredients/trained_models": {
+            "get" : {
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Restaurants", "Ingredients"],
+                "summary" : "List all restaurants's ingredients that have a trained model",
+                "description" : "List all of the ingredients assigned to a specific restaurant that have a trained model",
+                "responses" : {
+                    "200" : {
+                        "description" : "Success",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "array",
+                                    "items" : {
+                                        "type" : "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
         "/ingredients/{id_ingredient}" : {
             "parameters": [
                 {
@@ -504,7 +556,36 @@
                 },
                 "responses" : {
                     "201" : {
-                        "description" : "Created"
+                        "description" : "Created",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "id": {
+                                            "type" : "string"
+                                        },
+                                        "name": {
+                                            "type" : "string"
+                                        },
+                                        "ingredients": {
+                                            "type":"array",
+                                            "properties": {
+                                                "id_ingredient": {
+                                                    "type" : "string"
+                                                },
+                                                "amount": {
+                                                    "type" : "number"
+                                                },
+                                                "unit": {
+                                                    "type" : "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "400" : {
                         "description" : "Receita já cadastrada/Houve um problma, tente novamente"
@@ -606,7 +687,36 @@
                 },
                 "responses" : {
                     "200" : {
-                        "description" : "Updated"
+                        "description" : "Updated",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "id": {
+                                            "type" : "string"
+                                        },
+                                        "name": {
+                                            "type" : "string"
+                                        },
+                                        "ingredients": {
+                                            "type":"array",
+                                            "properties": {
+                                                "id_ingredient": {
+                                                    "type" : "string"
+                                                },
+                                                "amount": {
+                                                    "type" : "number"
+                                                },
+                                                "unit": {
+                                                    "type" : "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "400" : {
                         "description" : "Receita não cadastrada!"
@@ -999,7 +1109,40 @@
                 },
                 "responses" : {
                     "200" : {
-                        "description" : "Updated"
+                        "description" : "Updated",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "id" : {
+                                            "type" : "string"
+                                        },
+                                        "priority": {
+                                            "type" : "string"
+                                        },
+                                        "id_recipe": {
+                                            "type" : "string"
+                                        },
+                                        "portion_id": {
+                                            "type" : "string"
+                                        },
+                                        "id_restaurant" : {
+                                            "type" : "string"
+                                        },
+                                        "status": {
+                                            "type" : "string"
+                                        },
+                                        "created_at": {
+                                            "type" : "string"
+                                        },
+                                        "end_at": {
+                                            "type" : "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "400" : {
                         "description" : "Pedido não cadastrado!"
@@ -1203,6 +1346,43 @@
                                 }
                             }
                         }
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/forecast" : {
+            "get" : {
+                "parameters": [
+                    {
+                        "name" : "ingredients",
+                        "in" : "query",
+                        "required" : true,
+                        "type" : "string",
+                        "description" : "The desidered ingredients to be predicted. Separarate the ingredients by -",
+                        "example":{
+                            "ingredients":"Carne-Bacalhau-Salmao"
+                        }
+                    },
+                    {
+                        "name" : "days_to_be_forecasted",
+                        "in" : "query",
+                        "required" : true,
+                        "type" : "number",
+                        "description" : "The desidered number of days to be predicted"
+                    }
+                ],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Data Forecast","Restaurants"],
+                "summary" : "Predict the future demand for a number of ingredients",
+                "description" : "Predict the future demand for a number of ingredients",
+                "responses" : {
+                    "200" : {
+                        "description" : "Previsão Realizada"
                     },
                     "500" : {
                         "description" : "Internal Server Error"

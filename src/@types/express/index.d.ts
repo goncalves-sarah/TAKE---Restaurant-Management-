@@ -7,6 +7,11 @@ declare namespace Express {
 declare namespace NodeJS {
     interface ProcessEnv {
         SALT: string;
+        SALT_REFRESH_TOKEN: string;
         weatherAPIKEY: string;
+        DATABASE_URL: string;
+        expires_in: string;
+        expires_in_refresh_token: string;
+        expires_in_refresh_token_days: string;
     }
 }
