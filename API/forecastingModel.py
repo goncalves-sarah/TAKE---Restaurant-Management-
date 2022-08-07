@@ -6,6 +6,7 @@ import pathlib
 import numpy as np
 import warnings
 import json
+import platform
 
 def forecast(id_restaurant, ingredients, days_to_be_forecasted):
 
@@ -41,9 +42,12 @@ def forecast(id_restaurant, ingredients, days_to_be_forecasted):
 
     results = {}
     ingredient_has_model = []
+    my_os = platform.system()
 
     for ingredient in ingredients: 
+        
         filename = f'{path}\models\\{id_restaurant}_{ingredient}Model.sav'
+        filename = filename if my_os == 'Windows' else filename.replace("\\","/")
         
         try:
 
