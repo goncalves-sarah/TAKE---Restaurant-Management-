@@ -24,8 +24,10 @@ def get_ingredients_with_models():
     ingredients = get_ingredients(id_restaurant)
 
     return ingredients
-    
 
+@app.route('/', methods=['GET'])
+def index():
+    return "<h1>This is the API that has the trained models</h1>"
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
