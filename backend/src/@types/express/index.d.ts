@@ -13,5 +13,6 @@ declare namespace NodeJS {
         expires_in: string;
         expires_in_refresh_token: string;
         expires_in_refresh_token_days: string;
+        API_URL: string;
     }
 }

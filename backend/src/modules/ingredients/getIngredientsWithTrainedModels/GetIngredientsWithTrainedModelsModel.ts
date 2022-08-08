@@ -4,7 +4,7 @@ export class GetIngredientsWithTrainedModelsModel {
     async execute(id_restaurant: string) {
 
         try {
-            const url = `http://localhost:5000/ingredients?id_restaurant=${id_restaurant}`;
+            const url = `${process.env.API_URL}/ingredients?id_restaurant=${id_restaurant}`;
             const ingredients = await (await axios.get(url)).data;
 
             return ingredients;
