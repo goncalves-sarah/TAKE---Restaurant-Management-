@@ -10,70 +10,73 @@ import platform
 
 def forecast(id_restaurant, ingredients, days_to_be_forecasted):
 
-    path = pathlib.Path(__file__).parent.resolve()
+    try: 
+        path = pathlib.Path(__file__).parent.resolve()
 
-    days_to_be_forecasted = int(days_to_be_forecasted)
-    ingredients = ingredients.split("-")
+        days_to_be_forecasted = int(days_to_be_forecasted)
+        ingredients = ingredients.split("-")
 
-    weather = requests.get("https://tcc-2022.herokuapp.com/weather",json = {
-                "days" : days_to_be_forecasted,
-            }).json()
-    print(weather)
-    days = []
-    temperature = []
-    precipitation = []
-
-    for e in weather: 
-        days.append(e['date'])
-        temperature.append(e['temperature'])
-        precipitation.append(e['precipitation'])
-
-
-    df = pd.DataFrame()
-    df['Date'] = pd.Series(days)
-    df['Temperature'] = pd.Series(temperature)
-    df['Precipitation'] = pd.Series(precipitation)
-    df = df.set_index('Date')
-
-    days_to_be_forecasted = len(temperature)
-
-    df_exogenous = df[['Temperature','Precipitation']]
-    df_exogenous.index = pd.DatetimeIndex(df.index).to_period('D')
-
-    results = {}
-    ingredient_has_model = []
-    my_os = platform.system()
-
-    for ingredient in ingredients: 
+        weather = requests.get("https://tcc-2022-backend.herokuapp.com/weather",json = {
+                    "days" : days_to_be_forecasted,
+                }).json()
         
-        filename = f'{path}\models\\{id_restaurant}_{ingredient}Model.sav'
-        filename = filename if my_os == 'Windows' else filename.replace("\\","/")
-        print(filename)
-        try:
+        days = []
+        temperature = []
+        precipitation = []
 
-            model = pickle.load(open(filename, 'rb'))
-            
-            warnings.filterwarnings('ignore')
-            prediction = model.forecast(steps = days_to_be_forecasted, exog = df_exogenous).reset_index(drop = True)
-            
-            df[ingredient] = np.round(prediction.values,2)
-            ingredient_has_model.append(ingredient)
-        
-        except:
-            pass
+        for e in weather: 
+            days.append(e['date'])
+            temperature.append(e['temperature'])
+            precipitation.append(e['precipitation'])
 
-    for d in days:
-        element = df[d == df.index]
-        
-        info = {}
-        for i in ingredient_has_model:
-            info[i] = element[i].values[0]
 
-        results[d] = info
+        df = pd.DataFrame()
+        df['Date'] = pd.Series(days)
+        df['Temperature'] = pd.Series(temperature)
+        df['Precipitation'] = pd.Series(precipitation)
+        df = df.set_index('Date')
 
-    if len(ingredient_has_model) == 0:
+        days_to_be_forecasted = len(temperature)
+
+        df_exogenous = df[['Temperature','Precipitation']]
+        df_exogenous.index = pd.DatetimeIndex(df.index).to_period('D')
+
         results = {}
-    
-    results = json.dumps(results)
+        ingredient_has_model = []
+        my_os = platform.system()
+
+        for ingredient in ingredients: 
+            
+            filename = f'{path}\models\\{id_restaurant}_{ingredient}Model.sav'
+            filename = filename if my_os == 'Windows' else filename.replace("\\","/")
+            
+            try:
+
+                model = pickle.load(open(filename, 'rb'))
+                
+                warnings.filterwarnings('ignore')
+                prediction = model.forecast(steps = days_to_be_forecasted, exog = df_exogenous).reset_index(drop = True)
+                
+                df[ingredient] = np.round(prediction.values,2)
+                ingredient_has_model.append(ingredient)
+            
+            except:
+                pass
+
+        for d in days:
+            element = df[d == df.index]
+            
+            info = {}
+            for i in ingredient_has_model:
+                info[i] = element[i].values[0]
+
+            results[d] = info
+
+        if len(ingredient_has_model) == 0:
+            results = {}
         
-    return results
+        results = json.dumps(results)
+            
+        return results
+    except:
+        return json.dumps({error: "Houve um problema, tente novamente"})
