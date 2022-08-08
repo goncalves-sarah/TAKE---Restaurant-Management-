@@ -71,9 +71,9 @@ def forecast(id_restaurant, ingredients, days_to_be_forecasted):
 
         results[d] = info
 
-    results = json.dumps(results)
-
     if len(ingredient_has_model) == 0:
-        return ""
+        results = ""
+
+    results = json.dumps(results)
         
     return results
