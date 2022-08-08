@@ -18,7 +18,7 @@ def forecast(id_restaurant, ingredients, days_to_be_forecasted):
     weather = requests.get("https://tcc-2022.herokuapp.com/weather",json = {
                 "days" : days_to_be_forecasted,
             }).json()
-
+    print(weather)
     days = []
     temperature = []
     precipitation = []
@@ -48,7 +48,7 @@ def forecast(id_restaurant, ingredients, days_to_be_forecasted):
         
         filename = f'{path}\models\\{id_restaurant}_{ingredient}Model.sav'
         filename = filename if my_os == 'Windows' else filename.replace("\\","/")
-        
+        print(filename)
         try:
 
             model = pickle.load(open(filename, 'rb'))
@@ -72,8 +72,8 @@ def forecast(id_restaurant, ingredients, days_to_be_forecasted):
         results[d] = info
 
     if len(ingredient_has_model) == 0:
-        results = ""
-    print(results)
+        results = {}
+    
     results = json.dumps(results)
         
     return results
