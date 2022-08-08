@@ -11,9 +11,9 @@ def get_prediction():
     ingredients = args.get("ingredients")
     days_to_be_forecasted = args.get("days_to_be_forecasted")
     id_restaurant = args.get("id_restaurant")
-
+    print(ingredients,days_to_be_forecasted,id_restaurant)
     predictions = forecast(id_restaurant, ingredients, days_to_be_forecasted)
-
+    print(predictions)
     return predictions
 
 @app.route('/ingredients', methods=['GET'])
