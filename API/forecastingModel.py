@@ -56,7 +56,8 @@ def forecast(id_restaurant, ingredients, days_to_be_forecasted):
                 
                 warnings.filterwarnings('ignore')
                 prediction = model.forecast(steps = days_to_be_forecasted, exog = df_exogenous).reset_index(drop = True)
-                
+                if isinstance(prediction, pd.DataFrame):
+                    prediction = prediction[ingredient]
                 df[ingredient] = np.round(prediction.values,2)
                 ingredient_has_model.append(ingredient)
             
