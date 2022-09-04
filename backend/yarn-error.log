@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\sarah\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @types/dayjs -D
+  C:\Program Files\nodejs\node.exe C:\Users\sarah\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js init
 
 PATH: 
-  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Python310\Scripts\;C:\Python310\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\MATLAB\R2022a\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\sarah\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\sarah\AppData\Local\Programs\Python\Python39\;C:\Users\sarah\AppData\Local\Microsoft\WindowsApps;;C:\Users\sarah\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sarah\AppData\Roaming\npm
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Python310\Scripts\;C:\Python310\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\MATLAB\R2022a\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\dotnet\;C:\Users\sarah\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\sarah\AppData\Local\Programs\Python\Python39\;C:\Users\sarah\AppData\Local\Microsoft\WindowsApps;;C:\Users\sarah\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sarah\AppData\Roaming\npm;C:\Program Files\heroku\bin
 
 Yarn version: 
   1.22.17
@@ -14,17 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fdayjs: Not found
-      at Request.params.callback [as _callback] (C:\Users\sarah\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:67029:18)
-      at Request.self.callback (C:\Users\sarah\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140883:22)
-      at Request.emit (node:events:390:28)
-      at Request.<anonymous> (C:\Users\sarah\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141855:10)
-      at Request.emit (node:events:390:28)
-      at IncomingMessage.<anonymous> (C:\Users\sarah\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141777:12)
-      at Object.onceWrapper (node:events:509:28)
-      at IncomingMessage.emit (node:events:402:35)
-      at endReadableNT (node:internal/streams/readable:1343:12)
-      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+  Error: canceled
+      at Interface.<anonymous> (C:\Users\sarah\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:137143:13)
+      at Interface.emit (node:events:390:28)
+      at Interface._ttyWrite (node:readline:1081:16)
+      at ReadStream.onkeypress (node:readline:288:10)
+      at ReadStream.emit (node:events:390:28)
+      at emitKeys (node:internal/readline/utils:358:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (node:internal/readline/emitKeypressEvents:61:36)
+      at ReadStream.emit (node:events:390:28)
+      at addChunk (node:internal/streams/readable:315:12)
 
 npm manifest: 
   {
@@ -33,8 +33,10 @@ npm manifest:
     "main": "index.js",
     "license": "MIT",
     "scripts": {
+      "build": "tsc && yarn prisma migrate deploy",
       "dev": "ts-node-dev  --exit-child --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts ",
-      "test": "jest --run-in-band"
+      "test": "jest --run-in-band",
+      "start": "node dist/src/server.js"
     },
     "devDependencies": {
       "@types/axios": "^0.14.0",
@@ -51,6 +53,7 @@ npm manifest:
       "supertest": "^6.2.4",
       "ts-jest": "^28.0.7",
       "ts-node-dev": "^1.1.8",
+      "tsc": "^2.0.4",
       "typescript": "^4.6.4",
       "uuid": "^8.3.2"
     },
@@ -3353,6 +3356,11 @@ Lockfile:
       make-error "^1.1.1"
       source-map-support "^0.5.17"
       yn "3.1.1"
+  
+  tsc@^2.0.4:
+    version "2.0.4"
+    resolved "https://registry.yarnpkg.com/tsc/-/tsc-2.0.4.tgz#5f6499146abea5dca4420b451fa4f2f9345238f5"
+    integrity sha512-fzoSieZI5KKJVBYGvwbVZs/J5za84f2lSTLPYf6AGiIf43tZ3GNrI1QzTLcjtyDDP4aLxd46RTZq1nQxe7+k5Q==
   
   tsconfig@^7.0.0:
     version "7.0.0"

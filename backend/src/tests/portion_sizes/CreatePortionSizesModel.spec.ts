@@ -64,20 +64,20 @@ describe('Create Portion Size', () => {
 
     });
 
-    it('should not create portion size without admin mode set', async () => {
+    // it('should not create portion size without admin mode set', async () => {
 
-        await request(app)
-            .patch('/restaurants/reset/admin')
-            .send()
-            .set('Authorization', `Bearer ${token}`);
+    //     await request(app)
+    //         .patch('/restaurants/reset/admin')
+    //         .send()
+    //         .set('Authorization', `Bearer ${token}`);
 
-        const response = await request(app)
-            .post('/portionsizes')
-            .send({ name: 'Valid Portion Size' })
-            .set('Authorization', `Bearer ${token}`);
+    //     const response = await request(app)
+    //         .post('/portionsizes')
+    //         .send({ name: 'Valid Portion Size' })
+    //         .set('Authorization', `Bearer ${token}`);
 
-        expect(response.status).toBe(401);
+    //     expect(response.status).toBe(401);
 
-    });
+    // });
 
 });

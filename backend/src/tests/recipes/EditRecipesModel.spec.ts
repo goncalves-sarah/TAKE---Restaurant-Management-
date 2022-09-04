@@ -150,36 +150,36 @@ describe('Edit Recipe', () => {
 
     });
 
-    it('should not edit recipe without admin mode set', async () => {
+    // it('should not edit recipe without admin mode set', async () => {
 
-        const updatedRecipe = {
-            name: 'Valid Name',
-            recipe_ingredients: [
-                {
-                    id_ingredient: ingredients.at(0)?.id,
-                    amount: 200,
-                    unit: 'g'
-                },
-                {
-                    id_ingredient: ingredients.at(1)?.id,
-                    amount: 2,
-                    unit: 'L'
-                }
-            ]
-        }
+    //     const updatedRecipe = {
+    //         name: 'Valid Name',
+    //         recipe_ingredients: [
+    //             {
+    //                 id_ingredient: ingredients.at(0)?.id,
+    //                 amount: 200,
+    //                 unit: 'g'
+    //             },
+    //             {
+    //                 id_ingredient: ingredients.at(1)?.id,
+    //                 amount: 2,
+    //                 unit: 'L'
+    //             }
+    //         ]
+    //     }
 
-        await request(app)
-            .patch('/restaurants/reset/admin')
-            .send()
-            .set('Authorization', `Bearer ${token}`);
+    //     await request(app)
+    //         .patch('/restaurants/reset/admin')
+    //         .send()
+    //         .set('Authorization', `Bearer ${token}`);
 
-        const response = await request(app)
-            .put(`/recipes/${recipe_id}`)
-            .send(updatedRecipe)
-            .set('Authorization', `Bearer ${token}`);
+    //     const response = await request(app)
+    //         .put(`/recipes/${recipe_id}`)
+    //         .send(updatedRecipe)
+    //         .set('Authorization', `Bearer ${token}`);
 
-        expect(response.status).toBe(401);
+    //     expect(response.status).toBe(401);
 
-    });
+    // });
 
 });

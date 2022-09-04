@@ -94,20 +94,20 @@ describe('Create Recipe', () => {
 
     });
 
-    it('should not create ingredient without admin mode set', async () => {
+    // it('should not create ingredient without admin mode set', async () => {
 
-        await request(app)
-            .patch('/restaurants/reset/admin')
-            .send()
-            .set('Authorization', `Bearer ${token}`);
+    //     await request(app)
+    //         .patch('/restaurants/reset/admin')
+    //         .send()
+    //         .set('Authorization', `Bearer ${token}`);
 
-        const response = await request(app)
-            .post('/recipes')
-            .send({ ...recipe, name: 'Recipe Y' })
-            .set('Authorization', `Bearer ${token}`);
+    //     const response = await request(app)
+    //         .post('/recipes')
+    //         .send({ ...recipe, name: 'Recipe Y' })
+    //         .set('Authorization', `Bearer ${token}`);
 
-        expect(response.status).toBe(401);
+    //     expect(response.status).toBe(401);
 
-    });
+    // });
 
 });

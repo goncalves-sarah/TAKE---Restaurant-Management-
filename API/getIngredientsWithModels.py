@@ -16,8 +16,7 @@ def get_ingredients(id_restaurant):
     ingredients = []
 
     for f in files:
-        if(f.split("_")[0] == id_restaurant):
-            ingredient = f.split("_")[1].split("Model")[0]
-            ingredients.append(ingredient) 
+        ingredient = f.split("Model")[0]
+        ingredients.append(ingredient) 
 
     return json.dumps(ingredients)

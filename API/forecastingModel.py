@@ -16,7 +16,7 @@ def forecast(id_restaurant, ingredients, days_to_be_forecasted):
         days_to_be_forecasted = int(days_to_be_forecasted)
         ingredients = ingredients.split("-")
 
-        weather = requests.get("https://tcc-2022-backend.herokuapp.com/weather",json = {
+        weather = requests.get("https://take-backend.herokuapp.com/weather",json = {
                     "days" : days_to_be_forecasted,
                 }).json()
         
@@ -47,7 +47,7 @@ def forecast(id_restaurant, ingredients, days_to_be_forecasted):
 
         for ingredient in ingredients: 
             
-            filename = f'{path}\models\\{id_restaurant}_{ingredient}Model.sav'
+            filename = f'{path}\models\\{ingredient}Model.sav'
             filename = filename if my_os == 'Windows' else filename.replace("\\","/")
             
             try:
