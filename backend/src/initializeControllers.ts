@@ -10,6 +10,7 @@ import { DeleteIngredientsController } from "./modules/ingredients/deleteIngredi
 import { GetIngredientsByRestaurantController } from "./modules/ingredients/getIngredientsByRestaurant/GetIngredientsByRestaurantController";
 import { GetIngredientsWithTrainedModelsController } from "./modules/ingredients/getIngredientsWithTrainedModels/GetIngredientsWithTrainedModelsController";
 import { CreateOrdersController } from "./modules/orders/createOrders/CreateOrdersController";
+import { DeleteAllOrdersController } from "./modules/orders/deleteAllOrders/DeleteAllOrdersController";
 import { EditOrdersController } from "./modules/orders/editOrders/EditOrdersController";
 import { GetFilteredOrdersByRestaurantController } from "./modules/orders/getFilteredOrdersByRestaurant/GetFilteredOrdersByRestaurantController";
 import { CreatePortionSizesController } from "./modules/portion_sizes/createPortionSizes/CreatePortionSizesController";
@@ -128,6 +129,11 @@ class InitializeControllers {
     getFileteredOrdersByRestaurantDataController() {
         return new GetFilteredOrdersByRestaurantController();
     }
+
+    deleteAllRestaurantOrdersController() {
+        return new DeleteAllOrdersController();
+    }
+
 
     // COLLECT INGREDIENT DATA
 

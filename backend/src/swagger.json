@@ -996,7 +996,7 @@
                     {
                         "name" : "status",
                         "in" : "query",
-                        "required" : true,
+                        "required" : false,
                         "type" : "string",
                         "description" : "The desidered status of the orders"
                     }
@@ -1058,6 +1058,34 @@
                                 }
                             }
                         }
+                    },
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    }
+                }
+            },
+            "delete" : {
+                "parameters": [
+                    {
+                        "name" : "status",
+                        "in" : "query",
+                        "required" : false,
+                        "type" : "string",
+                        "description" : "The desidered status of the orders to be deleted. This is an Optional parameter."
+                    }
+                ],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "tags" : ["Restaurants", "Orders"],
+                "summary" : "Delete All Orders from a restaurant",
+                "description" : "Delete All Orders from a restaurant. You can filter it by their status or not. If you don't, all orders, no matter the status, will be deleted",
+                "responses" : {
+                    "204" : {
+                        "description" : "Success"
+                    },
+                    "400" : {
+                        "description" : "Ocorreu um erro ao deletar os pedidos, tente novamente"
                     },
                     "500" : {
                         "description" : "Internal Server Error"

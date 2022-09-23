@@ -10,7 +10,7 @@ export class GetFilteredOrdersByRestaurantModel {
             select: {
                 orders: {
                     where: {
-                        status
+                        status: status ? status : "Em Progresso"
                     },
                     select: {
                         id: true,

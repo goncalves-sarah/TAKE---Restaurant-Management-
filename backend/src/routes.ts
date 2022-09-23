@@ -28,6 +28,7 @@ const {
     createOrdersController,
     editOrdersController,
     getFileteredOrdersByRestaurantDataController,
+    deleteAllRestaurantOrdersController,
     collectIngredientDataController,
     getIngredientDataCollectedController,
     collectWeatherPeopleDataController,
@@ -64,6 +65,7 @@ routes.get('/weather', getWeatherForecastController().handle);
 routes.get('/forecast', ensureAuthenticateRestaurant, getForecastedDataController().handle);
 
 routes.delete('/restaurants', ensureAuthenticateRestaurant, deleteRestaurantController().handle)
+routes.delete('/orders', ensureAuthenticateRestaurant, deleteAllRestaurantOrdersController().handle)
 routes.delete('/ingredients/:id_ingredient', ensureAuthenticateRestaurant, deleteIngredientController().handle);
 routes.delete('/recipes/:id_recipe', ensureAuthenticateRestaurant, deleteRecipesController().handle);
 routes.delete('/portionsizes/:portion_id', ensureAuthenticateRestaurant, deletePortionSizesController().handle);
