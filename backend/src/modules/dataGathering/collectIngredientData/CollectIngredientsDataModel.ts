@@ -23,7 +23,7 @@ export class CollectIngredientsDataModel {
                 ingredients_data: {
                     deleteMany: {
                         date: {
-                            equals: new Date(new Date().setUTCHours(0, 0, 0, 0))
+                            equals: new Date(new Date().setHours(0, 0, 0, 0))
                         }
                     }
                 }
@@ -36,7 +36,7 @@ export class CollectIngredientsDataModel {
                 data: {
                     id_restaurant,
                     id_ingredient: ingredient.id_ingredient,
-                    date: new Date(new Date().setUTCHours(0, 0, 0, 0)),
+                    date: new Date(new Date().setHours(0, 0, 0, 0)),
                     initial_amount: ingredient.initial_amount,
                     final_amount: ingredient.final_amount ? ingredient.final_amount : null,
                     unit: ingredient.unit

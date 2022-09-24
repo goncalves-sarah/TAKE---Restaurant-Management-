@@ -7,7 +7,7 @@ export class GetIngredientsDataCollectedTodayModel {
         const ingredientData = await prisma.ingredient_Prediction_Data.findMany({
             where: {
                 id_restaurant,
-                date: new Date(new Date().setUTCHours(0, 0, 0, 0))
+                date: new Date(new Date().setHours(0, 0, 0, 0))
             },
             include: {
                 ingredient: {
