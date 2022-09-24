@@ -17,7 +17,7 @@ export class CollectWeatherPeopleDataModel {
 
         const basicPredictionDataExists = await prisma.basic_Prediction_Data.findFirst({
             where: {
-                date: new Date(new Date().setUTCHours(0, 0, 0, 0)),
+                date: new Date(new Date().setHours(0, 0, 0, 0)),
                 id_restaurant: {
                     equals: id_restaurant
                 },
@@ -52,7 +52,7 @@ export class CollectWeatherPeopleDataModel {
 
             await prisma.basic_Prediction_Data.create({
                 data: {
-                    date: new Date(new Date().setUTCHours(0, 0, 0, 0)),
+                    date: new Date(new Date().setHours(0, 0, 0, 0)),
                     id_restaurant,
                     customer_amount,
                     precipitation,
