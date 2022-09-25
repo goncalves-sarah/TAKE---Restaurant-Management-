@@ -35,6 +35,10 @@ export class EditOrdersModel {
                 portion_id,
                 status,
                 end_at: status == 'Concluído' ? new Date() : null
+            },
+            include: {
+                portion_size: true,
+                recipe: true
             }
         });
 

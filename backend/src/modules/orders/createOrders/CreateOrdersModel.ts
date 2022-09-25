@@ -18,6 +18,10 @@ export class CreateOrdersModel {
                 id_restaurant,
                 status: "Em Progresso",
                 created_at: new Date()
+            },
+            include: {
+                portion_size: true,
+                recipe: true
             }
         });
 
