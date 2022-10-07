@@ -1,4 +1,5 @@
 import { AuthenticateRestaurantController } from "./modules/account/authenticateRestaurant/AuthenticateRestaurantController";
+import { SendPasswordResetMailController } from "./modules/account/sendPasswordResetMail/SendPasswordResetMailController";
 import { CollectIngredientsDataController } from "./modules/dataGathering/collectIngredientData/CollectIngredientsDataController";
 import { CollectWeatherPeopleDataController } from "./modules/dataGathering/collectWeatherPeopleData/CollectWeatherPeopleDataController";
 import { GetIngredientsDataCollectedTodayController } from "./modules/dataGathering/geIngredientDataCollectedToday/GetIngredientsDataCollectedTodayController";
@@ -26,6 +27,7 @@ import { DeleteRestaurantController } from "./modules/restaurants/deleteRestaura
 import { EditRestaurantController } from "./modules/restaurants/editRestaurant/EditRestaurantController";
 import { GetRestaurantDataController } from "./modules/restaurants/getRestaurantData/GetRestaurantDataController";
 import { ResetAdminModeController } from "./modules/restaurants/resetAdminMode/ResetAdminModeController";
+import { ResetPasswordController } from "./modules/restaurants/resetPassword/ResetPasswordController";
 import { SetAdminModeController } from "./modules/restaurants/setAdminMode/SetAdminModeController";
 
 class InitializeControllers {
@@ -56,6 +58,14 @@ class InitializeControllers {
 
     authenticateRestaurantController() {
         return new AuthenticateRestaurantController();
+    }
+
+    sendPasswordResetMailController() {
+        return new SendPasswordResetMailController();
+    }
+
+    resetPassword() {
+        return new ResetPasswordController();
     }
 
     getCityByUFController() {

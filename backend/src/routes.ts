@@ -33,11 +33,15 @@ const {
     getIngredientDataCollectedController,
     collectWeatherPeopleDataController,
     getForecastedDataController,
-    getWeatherForecastController
+    getWeatherForecastController,
+    sendPasswordResetMailController,
+    resetPassword
 } = new InitializeControllers();
 
 routes.post('/restaurants', createRestaurantController().handle);
 routes.post('/authenticate', authenticateRestaurantController().handle);
+routes.post('/forgot-password', sendPasswordResetMailController().handle);
+routes.post('/reset-password', resetPassword().handle);
 routes.post('/ingredients', ensureAuthenticateRestaurant, createIngredientController().handle);
 routes.post('/recipes', ensureAuthenticateRestaurant, createRecipesController().handle);
 routes.post('/portionsizes', ensureAuthenticateRestaurant, createPortionSizesController().handle);
