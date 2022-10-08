@@ -303,6 +303,76 @@
                 }
             }
         },
+        "/forgot-password" : {
+            "post" : {
+                "security": [] ,
+                "tags" : ["Restaurants"],
+                "summary" : "Send Forgot Password Mail",
+                "description" : "User forgets their password and receives an email to reset it",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "email" : {
+                                        "type" : "string"
+                                    }
+                                },
+                                "example" : {
+                                    "email" : "silva@hotmail.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    },
+                    "204" : {
+                        "description" : "No Errors Happened"
+                    }
+                }
+            }
+        },
+        "/reset-password" : {
+            "post" : {
+                "security": [] ,
+                "tags" : ["Restaurants"],
+                "summary" : "Reset Password",
+                "description" : "After User Clicks on Link sent by email and chooses new password, it's updated on the database",
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "id_restaurant" : {
+                                        "type" : "string"
+                                    },
+                                    "password" : {
+                                        "type" : "string"
+                                    }
+                                },
+                                "example" : {
+                                    "id_restaurant": "517aef07-7ca7-4d73-b157-d3abf2abe8aa",
+                                    "password" : "minhaSenha2"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "500" : {
+                        "description" : "Internal Server Error"
+                    },
+                    "200" : {
+                        "description" : "Senha alterada com sucesso!"
+                    }
+                }
+            }
+        },
         "/authenticate" : {
             "post" : {
                 "security": [] ,
