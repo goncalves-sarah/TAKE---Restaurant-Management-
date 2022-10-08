@@ -29,7 +29,7 @@ export class SendPasswordResetMailModel {
                 context: { link, restaurant }
             }
 
-            transport.sendMail(mailOptions, function (error, info) {
+            transport.sendMail(mailOptions, function (error) {
                 if (error) {
                     console.log(error)
                     throw new Error("Houve um problema no envio do email")
