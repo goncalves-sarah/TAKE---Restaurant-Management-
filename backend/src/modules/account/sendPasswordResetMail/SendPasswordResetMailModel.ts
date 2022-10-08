@@ -1,7 +1,8 @@
 import { hash } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import prisma from "../../../database/prismaClient";
-import transport from "../../../mail/mail";
+import transport from "../../../mail/Mail";
+
 
 export class SendPasswordResetMailModel {
     async execute(email: string) {
