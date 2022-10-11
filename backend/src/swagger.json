@@ -338,26 +338,28 @@
         },
         "/reset-password" : {
             "patch" : {
-                "security": [] ,
+                "security": [{
+                    "bearerAuth": []
+                }],
                 "tags" : ["Restaurants"],
                 "summary" : "Reset Password",
-                "description" : "After User Clicks on Link sent by email and chooses new password, it's updated on the database",
+                "description" : "This route is used in 2 case, 1 when the user forgets their password and receives an email with a link to update it, in this case, it's not necessary to send the current password. For the 2 case, the user is in their profile and wishes to update their password, so it's required for them to send their current one as well as the new one",
                 "requestBody" : {
                     "content" : {
                         "application/json" : {
                             "schema" : {
                                 "type" : "object",
                                 "properties" : {
-                                    "id_restaurant" : {
+                                    "password" : {
                                         "type" : "string"
                                     },
-                                    "password" : {
+                                    "newPassword" : {
                                         "type" : "string"
                                     }
                                 },
                                 "example" : {
-                                    "id_restaurant": "517aef07-7ca7-4d73-b157-d3abf2abe8aa",
-                                    "password" : "minhaSenha2"
+                                    "password" : "minhaSenha",
+                                    "newPassword": "minhaSenha2"
                                 }
                             }
                         }
