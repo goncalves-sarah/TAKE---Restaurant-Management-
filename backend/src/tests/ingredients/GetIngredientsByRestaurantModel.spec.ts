@@ -55,7 +55,7 @@ describe('Get Ingredients From Restaurant', () => {
         const response = await request(app)
             .get('/ingredients')
             .send()
-            .set('Authorization', `Bearer ${token}`);;
+            .set('Authorization', `Bearer ${token}`);
 
         expect(response.body.ingredients).toHaveLength(2);
 

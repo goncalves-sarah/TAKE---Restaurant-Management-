@@ -41,7 +41,6 @@ const {
 routes.post('/restaurants', createRestaurantController().handle);
 routes.post('/authenticate', authenticateRestaurantController().handle);
 routes.post('/forgot-password', sendPasswordResetMailController().handle);
-routes.post('/reset-password', resetPassword().handle);
 routes.post('/ingredients', ensureAuthenticateRestaurant, createIngredientController().handle);
 routes.post('/recipes', ensureAuthenticateRestaurant, createRecipesController().handle);
 routes.post('/portionsizes', ensureAuthenticateRestaurant, createPortionSizesController().handle);
@@ -52,6 +51,7 @@ routes.post('/data/collect/additional', ensureAuthenticateRestaurant, collectWea
 routes.put('/restaurants', ensureAuthenticateRestaurant, editRestaurantController().handle);
 routes.put('/recipes/:id_recipe', ensureAuthenticateRestaurant, editRecipeController().handle);
 
+routes.patch('/reset-password', ensureAuthenticateRestaurant, resetPassword().handle);
 routes.patch('/restaurants/admin', ensureAuthenticateRestaurant, setAdminModeController().handle);
 routes.patch('/restaurants/reset/admin', ensureAuthenticateRestaurant, resetAdminModeController().handle);
 routes.patch('/orders/:id_order', ensureAuthenticateRestaurant, editOrdersController().handle);

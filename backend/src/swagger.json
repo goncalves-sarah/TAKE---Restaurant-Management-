@@ -337,7 +337,7 @@
             }
         },
         "/reset-password" : {
-            "post" : {
+            "patch" : {
                 "security": [] ,
                 "tags" : ["Restaurants"],
                 "summary" : "Reset Password",
