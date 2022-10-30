@@ -7,6 +7,7 @@ import numpy as np
 import warnings
 import json
 import platform
+from datetime import date
 
 def forecast(id_restaurant, ingredients, days_to_be_forecasted):
 
@@ -23,9 +24,11 @@ def forecast(id_restaurant, ingredients, days_to_be_forecasted):
         days = []
         temperature = []
         precipitation = []
+        weekDays = []
 
         for e in weather: 
             days.append(e['date'])
+            weekDays.append(date.fromisoformat(e['date']).weekday())
             temperature.append(e['temperature'])
             precipitation.append(e['precipitation'])
 
@@ -34,11 +37,12 @@ def forecast(id_restaurant, ingredients, days_to_be_forecasted):
         df['Date'] = pd.Series(days)
         df['Temperature'] = pd.Series(temperature)
         df['Precipitation'] = pd.Series(precipitation)
+        df['WeekDays'] = pd.Series(weekDays)
         df = df.set_index('Date')
 
         days_to_be_forecasted = len(temperature)
 
-        df_exogenous = df[['Temperature','Precipitation']]
+        df_exogenous = df[['Temperature','Precipitation','WeekDays']]
         df_exogenous.index = pd.DatetimeIndex(df.index).to_period('D')
 
         results = {}
@@ -71,7 +75,9 @@ def forecast(id_restaurant, ingredients, days_to_be_forecasted):
             for i in ingredient_has_model:
                 info[i] = element[i].values[0]
 
-            results[d] = info
+            data = d.split("-")
+            dataFormatada = f'{data[2]}-{data[1]}-{data[0]}'
+            results[dataFormatada] = info
 
         if len(ingredient_has_model) == 0:
             results = {}
