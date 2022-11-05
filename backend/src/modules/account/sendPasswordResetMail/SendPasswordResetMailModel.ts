@@ -20,7 +20,7 @@ export class SendPasswordResetMailModel {
                 expiresIn: "1d"
             });
 
-            const link = `${process.env.FRONT_URL}/reset-password/${restaurant.id}/${token}`;
+            const link = `${process.env.FRONT_URL}/password-reset/${restaurant.id}/${token}`;
 
             const mailOptions = {
                 from: "tcc@tcc2022.com",

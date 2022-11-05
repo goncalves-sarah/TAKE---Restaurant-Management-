@@ -82,7 +82,7 @@ model Orders {
   restaurant    Restaurants  @relation(fields: [id_restaurant], references: [id], onDelete: Cascade)
   end_at        DateTime?
   portion_id    String
-  portion_size  Portion_Size @relation(fields: [portion_id], references: [id], onDelete: SetNull)
+  portion_size  Portion_Size @relation(fields: [portion_id], references: [id], onDelete: Cascade)
 
   @@map("orders")
 }

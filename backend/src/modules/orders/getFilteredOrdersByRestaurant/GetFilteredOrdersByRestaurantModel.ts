@@ -10,7 +10,10 @@ export class GetFilteredOrdersByRestaurantModel {
             select: {
                 orders: {
                     where: {
-                        status: status ? status : undefined
+                        status: status ? status : undefined,
+                        created_at: {
+                            gte: new Date(new Date().setHours(0, 0, 0, 0)) // gte -> greater than
+                        }
                     },
                     select: {
                         id: true,

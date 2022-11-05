@@ -4,12 +4,10 @@ import { ResetPasswordModel } from "./ResetPasswordModel";
 export class ResetPasswordController {
     async handle(req: Request, res: Response) {
 
-        const { password, newPassword } = req.body;
-
-        const { id_restaurant } = req;
+        const { id_restaurant, newPassword } = req.body;
 
         const resetPasswordModel = new ResetPasswordModel();
-        await resetPasswordModel.execute({ id_restaurant, password, newPassword });
+        await resetPasswordModel.execute({ id_restaurant, newPassword });
 
         return res.status(200).json({ "message": "Senha alterada com sucesso!" });
     }

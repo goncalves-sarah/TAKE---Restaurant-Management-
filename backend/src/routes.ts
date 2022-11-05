@@ -51,7 +51,7 @@ routes.post('/data/collect/additional', ensureAuthenticateRestaurant, collectWea
 routes.put('/restaurants', ensureAuthenticateRestaurant, editRestaurantController().handle);
 routes.put('/recipes/:id_recipe', ensureAuthenticateRestaurant, editRecipeController().handle);
 
-routes.patch('/reset-password', ensureAuthenticateRestaurant, resetPassword().handle);
+routes.patch('/reset-password', resetPassword().handle);
 routes.patch('/restaurants/admin', ensureAuthenticateRestaurant, setAdminModeController().handle);
 routes.patch('/restaurants/reset/admin', ensureAuthenticateRestaurant, resetAdminModeController().handle);
 routes.patch('/orders/:id_order', ensureAuthenticateRestaurant, editOrdersController().handle);

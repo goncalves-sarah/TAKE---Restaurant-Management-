@@ -21,7 +21,7 @@ export class DeletePortionSizesModel {
         try {
             await prisma.portion_Size.delete({
                 where: {
-                    id: portion_id
+                    id: portionSizeExist.id
                 }
             });
         } catch (err) {
