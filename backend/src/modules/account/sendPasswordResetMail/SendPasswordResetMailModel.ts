@@ -14,7 +14,7 @@ export class SendPasswordResetMailModel {
         });
         if (restaurant) {
 
-            const SALT = await hash(email, 10) + process.env.SALT_RESET_PASSWORD
+            const SALT = await hash(email + process.env.SALT_RESET_PASSWORD, 10)
             const token = sign({ email }, SALT, {
                 subject: restaurant.id,
                 expiresIn: "1d"
