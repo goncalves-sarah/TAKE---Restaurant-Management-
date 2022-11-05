@@ -1,4 +1,3 @@
-import { hash } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import prisma from "../../../database/prismaClient";
 import transport from "../../../mail/Mail";
@@ -14,14 +13,12 @@ export class SendPasswordResetMailModel {
         });
         if (restaurant) {
 
-            const SALT = process.env.SALT_RESET_PASSWORD
-
-            const token = sign({ email }, SALT, {
+            const token = sign({ email }, process.env.SALT_RESET_PASSWORD, {
                 subject: restaurant.id,
                 expiresIn: "1d"
-            });
+            }).split(".")[0];
 
-            const link = `${process.env.FRONT_URL}/password-reset/${restaurant.id}/${token.split(".")[0]}`;
+            const link = `${process.env.FRONT_URL}/password-reset/${restaurant.id}/${token}`;
 
             const mailOptions = {
                 from: "tcc@tcc2022.com",
