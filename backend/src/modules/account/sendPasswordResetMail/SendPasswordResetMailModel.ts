@@ -13,12 +13,7 @@ export class SendPasswordResetMailModel {
         });
         if (restaurant) {
 
-            const token = sign({ email }, process.env.SALT_RESET_PASSWORD, {
-                subject: restaurant.id,
-                expiresIn: "1d"
-            }).split(".")[0];
-
-            const link = `${process.env.FRONT_URL}/password-reset/${restaurant.id}/${token}`;
+            const link = `${process.env.FRONT_URL}/password-reset/${restaurant.id}`;
 
             const mailOptions = {
                 from: "tcc@tcc2022.com",
